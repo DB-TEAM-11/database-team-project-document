@@ -400,7 +400,7 @@ Response JSON (200 OK)
 // 서버: 해당 거래 및 아이템 데이터 삭제
 // DealCompleteRequest
 
-14. 아이템 복원 요청
+14. 아이템 복원/경매 요청
 POST /item/action
 -------------------------------------
 JSON Request
@@ -417,7 +417,7 @@ Response JSON (200 OK)
 // ItemActionRequest
 // ItemActionResponse
 
-15. 아이템 복원 완료 
+15. 아이템 복원/경매 완료 
 POST /item/result
 -------------------------------------
 JSON Request
