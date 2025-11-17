@@ -114,7 +114,7 @@ Response JSON (200 OK)
 
 
 6. 전시장 아이템 전체 조회 (Get All Displayed Items)
-GET /display/currentAll
+POST /display/currentAll
 -------------------------------------
 Request JSON
 {
@@ -256,7 +256,7 @@ Response JSON (200 OK)
             "itemCatalogKey": 45,
             "foundGrade": 0,
             "foundFlawEa": 0,
-            "isAuthenticityFound": false,
+            "isAuthenticityFound": -1,
             "customerKey": 89,
 	    "revealedFraud":0.58,
 	    "revealedWellCollect":0.76,
@@ -271,7 +271,7 @@ Response JSON (200 OK)
             "itemCatalogKey": 78,
             "foundGrade": 0,
             "foundFlawEa": 0,
-            "isAuthenticityFound": false,
+            "isAuthenticityFound": -1,
             "customerKey": 75,
 	    "revealedFraud":0.58,
 	    "revealedWellCollect":0.76,
@@ -286,7 +286,7 @@ Response JSON (200 OK)
             "itemCatalogKey": 12,
             "foundGrade": 0,
             "foundFlawEa": 0,
-            "isAuthenticityFound": false,
+            "isAuthenticityFound": -1,
             "customerKey": 49,
 	    "revealedFraud":0.58,
 	    "revealedWellCollect":0.76,
@@ -422,14 +422,6 @@ POST /item/result
 -------------------------------------
 JSON Request
 {
-    "actionResultItemKeys": [
-        {
-            "itemKey": 301
-        },
-        {
-            "itemKey": 302
-        }
-    ]
 }
 Response JSON (200 OK)
 {
@@ -438,26 +430,24 @@ Response JSON (200 OK)
             "itemKey": 301,
             "itemState": 1,     // 복원 완료 시, 전시 중 OnDisplay으로 변경. 아직 아니면 2(복원 중) 유지
             "resultMoney": "-1500",  // 복원 비용/경매 정산금
-            "appraisedPrice": 2000,    // 복원 후 감정가 상승/하락 반영 최종 값
-            "purchasePrice": 1800     // 복원 후 구매가 상승/하락 반영
+            "appraisedPrice": 2000    // 복원 후 감정가 상승/하락 반영 최종 값
         },
         {
             "itemKey": 302,
             "itemState": 3,     // 복원 완료 시, 전시 중 OnDisplay으로 변경. 아직 아니면 2(복원 중) 유지
             "resultMoney": "0",  // 복원 비용 요구
-            "appraisedPrice": 1500,    // 복원 후 감정가 상승/하락 반영 최종 값
-            "purchasePrice": 1300     // 복원 후 구매가 상승/하락 반영
+            "appraisedPrice": 1500    // 복원 후 감정가 상승/하락 반영 최종 값
         },
         {
             "itemKey": 303,
             "itemState": 1,     // 복원 완료 시, 전시 중 OnDisplay으로 변경. 아직 아니면 2(복원 중) 유지
             "resultMoney": "+1500",  // 경매 정산금 명시
-            "appraisedPrice": 1500,    // 복원 후 감정가 상승/하락 반영 최종 값
-            "purchasePrice": 1300     // 복원 후 구매가 상승/하락 반영
+            "appraisedPrice": 1500    // 복원 후 감정가 상승/하락 반영 최종 값
         }
     ],
     "leftMoney": 50200          // 모든 액션 후 현재 남은 돈
 }
+// 복원/경매가 완료된 아이템들만 리턴하는 거임
 // 매일 아침에(날 시작 시) 전시장에 복원 중인 아이템 담아서 전달
 // 서버에서 그만큼 날짜 지났으면 복원 완료 처리
 // actionResultRequest
@@ -537,10 +527,7 @@ Response JSON (400 Bad Request)
 // LoanUpdateResponse
 
 
-
-
-
-19. 다음 날 넘어가기(정산하기)
+19. 다음 날 넘어가기
 POST /day/next
 -------------------------------------
 JSON Request
@@ -552,10 +539,19 @@ Response JSON (200 OK)
     "leftMoney": 48000,
     "personalDebt": 500000,
     "pawnshopDebt": 45000,
+}
+
+19. 정산하기
+POST /day/finalize
+-------------------------------------
+JSON Request
+{
+}       
+Response JSON (200 OK)
+{
     "dailyTransactionSummary": {
         "startMoney": 50000,
-        "boughtSum": 3000,
-        "soldSum": 4500,
+	"todayEndMoney": 60000
         "interest": -5000,
         "weeklyInterest": -1500, // 매주 말일에만 포함. 아니면 0 넣기
         "finalMoney": 48000
