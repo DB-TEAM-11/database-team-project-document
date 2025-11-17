@@ -549,13 +549,11 @@ JSON Request
 }       
 Response JSON (200 OK)
 {
-    "dailyTransactionSummary": {
         "startMoney": 50000,
 	"todayEndMoney": 60000
         "interest": -5000,
         "weeklyInterest": -1500, // 매주 말일에만 포함. 아니면 0 넣기
         "finalMoney": 48000
-    }
 }
 // 클라이언트 처리 로직: 하루 종료 시 POST /day/next 호출
 // GameSessionData 갱신
