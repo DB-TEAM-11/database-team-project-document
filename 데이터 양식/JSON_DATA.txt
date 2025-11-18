@@ -518,11 +518,17 @@ Response JSON (200 OK)
     "debtType": "PERSONAL",
     "leftDebtAmount": 400000    // 상환 후 남은 대출금
     "leftMoney": 60000,        // 대출/상환 후 남은 돈
+
+    "isGameEnded": true,
+    "isGameOvered": true, // 파산으로 게임 오버인지 여부. false면 정상 클리어
+    "worldRecords": {
+        "playerId": "string",
+        "nickname": "PawnMaster",
+        "pawnshopName": "Elite Pawns",
+        "gameEndDatyCount": 57,
+        "gameEndDate": "2024-01-15T10:00:00Z"
 }
-Response JSON (400 Bad Request)
-{
-    "error": "Cannot repay more than the current debt."
-}
+
 // 클라이언트 처리 로직: 대출/상환 시 POST /loan/update 호출
 //  LoanUpdateRequest
 // LoanUpdateResponse
