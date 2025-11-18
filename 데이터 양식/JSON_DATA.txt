@@ -533,6 +533,8 @@ Response JSON (200 OK)
 //  LoanUpdateRequest
 // LoanUpdateResponse
 
+/
+
 
 19. 다음 날 넘어가기
 POST /day/next
