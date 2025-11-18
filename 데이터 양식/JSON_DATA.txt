@@ -257,7 +257,7 @@ Response JSON (200 OK)
             "itemCatalogKey": 45,
             "foundGrade": 0,
             "foundFlawEa": 0,
-            "isAuthenticityFound": -1,
+            "isAuthenticityFound": "N"
             "customerKey": 89,
 	    "revealedFraud":0.58,
 	    "revealedWellCollect":0.76,
@@ -272,7 +272,7 @@ Response JSON (200 OK)
             "itemCatalogKey": 78,
             "foundGrade": 0,
             "foundFlawEa": 0,
-            "isAuthenticityFound": -1,
+            "isAuthenticityFound": "N",
             "customerKey": 75,
 	    "revealedFraud":0.58,
 	    "revealedWellCollect":0.76,
@@ -287,7 +287,7 @@ Response JSON (200 OK)
             "itemCatalogKey": 12,
             "foundGrade": 0,
             "foundFlawEa": 0,
-            "isAuthenticityFound": -1,
+            "isAuthenticityFound": "N",
             "customerKey": 49,
 	    "revealedFraud":0.58,
 	    "revealedWellCollect":0.76,
@@ -337,7 +337,7 @@ Response JSON (200 OK)
     "changedAppraisedPriceByAction": "+200",   // 감정가 상승/하락분
     "foundGrade": 2,
     "foundFlawEa": 1,
-    "isAuthenticityFound": true,
+    "isAuthenticityFound": "N",
     "leftMoney": 49870          // 액션 후 남은 돈
 
 }
