@@ -115,7 +115,7 @@ CREATE TABLE DEAL_RECORD(
     BOUGHT_DATE NUMBER(5), -- 구매한 게임 내 일수. 구매한 날짜에 채움
     CONSTRAINT CK_BOUGHT_DATE_GT_ONE CHECK(BOUGHT_DATE>=1),
     SOLD_DATE NUMBER(5), -- 판매한 게임 내 일수. 판매한 날짜에 채움
-    LAST_ACTION_DATE NUMBER(5) -- 마지막 액션 시작 일수 << 추가 됨
+    LAST_ACTION_DATE NUMBER(5), -- 마지막 액션 시작 일수 << 추가 됨
     CONSTRAINT CK_SOLD_DATE__GT_ONE CHECK(SOLD_DATE>=1),
     CONSTRAINT CK_BUYER_KEY CHECK(BUYER_KEY IS NULL OR BUYER_KEY != SELLER_KEY)--판매자와 구매자는 달라야 함
 );
