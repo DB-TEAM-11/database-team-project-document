@@ -23,7 +23,8 @@ Request JSON
 
 Response JSON (200 OK)
 {
-    "sessionToken": "string"
+    "sessionToken": "string",
+    "hasGameSession": "Y"     // "Y" , "N"
 }
 // 클라이언트: GameSessionData에 저장
 // PlayerRegisterLoginRequest
@@ -523,7 +524,7 @@ Response JSON (400 Bad Request)
     "error": "Cannot repay more than the current debt."
 }
 // 클라이언트 처리 로직: 대출/상환 시 POST /loan/update 호출
-// LoanUpdateRequest
+//  LoanUpdateRequest
 // LoanUpdateResponse
 
 
@@ -553,9 +554,20 @@ Response JSON (200 OK)
 	"todayEndMoney": 60000
         "interest": -5000,
         "weeklyInterest": -1500, // 매주 말일에만 포함. 아니면 0 넣기
-        "finalMoney": 48000
+        "finalMoney": 48000,
+
+        "isGameEnded": true,
+        "isGameOvered": true, // 파산으로 게임 오버인지 여부. false면 정상 클리어
+        "worldRecords": {
+            "playerId": "string",
+            "nickname": "PawnMaster",
+            "pawnshopName": "Elite Pawns",
+            "gameEndDatyCount": 57,
+            "gameEndDate": "2024-01-15T10:00:00Z"
 }
 // 클라이언트 처리 로직: 하루 종료 시 POST /day/next 호출
+// "isGameEnded"은 항상 주고
+// 아래 정보들은 false면 안 채워서 줌
 // GameSessionData 갱신
 // DayNextResponse
 // DailyTransactionSummary
@@ -594,6 +606,34 @@ Response JSON (200 OK)
 // WorldRecordsResponse
 // WorldRecordsData
 
+22. 로그아웃 / 세션 만료
+POST /player/logout
+-------------------------------------
+JSON Request
+{
+}
+Response JSON (200 OK)
+{
+}
+// 클라이언트 처리 로직: 로그아웃 시 POST /player/logout 호출
+// 서버: 세션 토큰 검증 및 로그아웃 처리
+// errorResponse
+// LogoutResponse
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------제거-----------------------------------
+
 21. 게임 끝났는지 확인
 POST /game/checkEnd
 -------------------------------------
@@ -617,17 +657,3 @@ Response JSON (200 OK)
 // 게임 종료 시 worldRecord도 함께 전달
 // errorResponse
 // GameCheckEndResponse
-
-22. 로그아웃 / 세션 만료
-POST /player/logout
--------------------------------------
-JSON Request
-{
-}
-Response JSON (200 OK)
-{
-}
-// 클라이언트 처리 로직: 로그아웃 시 POST /player/logout 호출
-// 서버: 세션 토큰 검증 및 로그아웃 처리
-// errorResponse
-// LogoutResponse
