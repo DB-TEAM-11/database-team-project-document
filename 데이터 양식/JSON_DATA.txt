@@ -216,10 +216,11 @@ Response JSON (200 OK)
 
 
 9. 아이템 힌트 조회 (Get Random Item Hint)
-GET /item/getHints?itemKey=301
+POST /item/getHints
 -------------------------------------
 Request JSON
 {
+    "itemKey": 301
 }
 Response JSON (200 OK)
 {
